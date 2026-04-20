@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.swing.JToggleButton"/>
-    <fullyQualifiedTypeName name="entity.LoaiSanPham"/>
-    <fullyQualifiedTypeName name="javax.swing.BoxLayout"/>
-    <fullyQualifiedTypeName name="java.awt.Component"/>
-    <fullyQualifiedTypeName name="java.time.Duration"/>
-    <fullyQualifiedTypeName name="dao.ChiTietHoaDon_dao"/>
-    <fullyQualifiedTypeName name="entity.SanPham"/>
-    <fullyQualifiedTypeName name="entity.ChiTietHoaDon"/>
-    <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
-    <fullyQualifiedTypeName name="entity.HoaDon"/>
-    <fullyQualifiedTypeName name="dao.HoaDon_dao"/>
-    <fullyQualifiedTypeName name="java.time.LocalTime"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="java.lang.StringIndexOutOfBoundsException"/>
     <fullyQualifiedTypeName name="gui.NhanVienPanel"/>
@@ -60,4 +48,16 @@
     <fullyQualifiedTypeName name="gui.PhongBan"/>
     <fullyQualifiedTypeName name="entity.NhanVien"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="weka.core.converters.ConverterUtils.DataSource"/>
+    <fullyQualifiedTypeName name="weka.classifiers.trees.J48"/>
+    <fullyQualifiedTypeName name="weka.classifiers.evaluation.Evaluation"/>
+    <fullyQualifiedTypeName name="classification.Preprocess"/>
+    <fullyQualifiedTypeName name="java.time.Instant"/>
+    <fullyQualifiedTypeName name="classification.Classification"/>
+    <fullyQualifiedTypeName name="weka.core.Instances"/>
+    <fullyQualifiedTypeName name="weka.clusterers.SimpleKMeans"/>
+    <fullyQualifiedTypeName name="datamining.Clustering"/>
+    <fullyQualifiedTypeName name="weka.core.ManhattanDistance"/>
+    <fullyQualifiedTypeName name="weka.filters.Filter"/>
+    <fullyQualifiedTypeName name="weka.filters.unsupervised.attribute.NominalToBinary"/>
 </qualifiedTypeNameHistroy>

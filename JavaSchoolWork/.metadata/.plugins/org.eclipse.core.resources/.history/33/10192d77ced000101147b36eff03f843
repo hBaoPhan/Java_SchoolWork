@@ -1,7 +1,0 @@
-package gui;
-
-public class PhongBan {
-	private String ma;
-	private String ten;
-
-}

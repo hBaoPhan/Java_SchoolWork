@@ -2,5 +2,6 @@
     <conversations>
         <conversation conversationId="bc07628b-4dc0-4ac9-a95a-544e5270d15b" creationDate="2025-11-05T04:45:35.175541Z" lastMessageDate="2025-11-05T04:45:35.175541Z" title="tại sao getAllBan không hoạt động"/>
         <conversation conversationId="eeb837bc-e817-4b2f-a78a-164e116d99c4" creationDate="2025-11-06T02:56:12.158999Z" lastMessageDate="2025-11-06T02:56:12.158999Z" title="không lấy được dữ liệu field thoiGian từ sql"/>
+        <conversation conversationId="fd5a7d16-963b-421e-994e-a2626f7186fe" creationDate="2026-04-19T12:38:55.546706900Z" lastMessageDate="2026-04-19T12:48:45.028512600Z" title="Resolving Weka Integration Issues in Java Project"/>
     </conversations>
 </user>
