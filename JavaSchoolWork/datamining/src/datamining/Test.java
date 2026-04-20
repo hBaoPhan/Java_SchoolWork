@@ -20,7 +20,14 @@ public class Test {
 		
 //		clus.buildKmeanModel(dataTrain, 3);
 //		clus.evalKmeanModel(dataTest);
-		ar.findAR_Apriori(pre.Nominal2Binary(dataTrain), 0.1, 0.5, 10);
+		
+		Instances binaryData = pre.Nominal2Binary(dataTrain);
+		ar.findAR_Apriori(binaryData, 0.1, 0.5, 10);
+		
+		// FPGrowth không hỗ trợ class attribute, cần xóa class index
+		Instances dataForFP = new Instances(binaryData);
+		dataForFP.setClassIndex(-1);
+		ar.findAR_FPGrowth(dataForFP, 0.1, 0.5, 10);
 		
 		
 		
