@@ -19,9 +19,33 @@ public class User {
     private String email;
 
     @ManyToMany
-    @JoinTable( name = "users_groups",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @JoinTable( name = "users_groups",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<Group> groups;
 
     public User() {
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 }
