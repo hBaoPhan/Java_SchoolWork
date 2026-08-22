@@ -1,0 +1,75 @@
+@startuml
+
+hide methods
+hide stereotypes
+
+entity departments {
+    * dept_id : VARCHAR(15) <<PK>>
+    --
+    * dept_name : VARCHAR
+    location : VARCHAR
+}
+
+entity employees {
+    * emp_id : BIGINT <<PK>>
+    --
+    * emp_name : VARCHAR
+    email : VARCHAR <<UK>>
+    hire_date : DATE
+    dept_id : VARCHAR(15) <<FK>>
+    manager_id : BIGINT <<FK>>
+}
+
+entity full_time_employees {
+    * emp_id : BIGINT <<PK, FK>>
+    --
+    monthly_salary : DECIMAL
+}
+
+entity part_time_employees {
+    * emp_id : BIGINT <<PK, FK>>
+    --
+    hourly_rate : DECIMAL
+}
+
+entity employees_profiles {
+    * emp_id : BIGINT <<PK, FK>>
+    --
+    address : VARCHAR
+    phone : VARCHAR
+    date_of_birth : DATE
+}
+
+entity projects {
+    * prj_id : BIGINT <<PK>>
+    --
+    * prj_name : VARCHAR
+    budget : DECIMAL
+    start_date : DATE
+    end_date : DATE
+    status : VARCHAR
+}
+
+entity employees_projects {
+    * emp_id : BIGINT <<PK, FK>>
+    * prj_id : BIGINT <<PK, FK>>
+}
+
+' Department - Employee
+departments ||--o{ employees : "has"
+
+' Employee self-reference
+employees ||--o{ employees : "manages"
+
+' JOINED inheritance
+employees ||--o| full_time_employees : "is"
+employees ||--o| part_time_employees : "is"
+
+' Employee - Profile
+employees ||--o| employees_profiles : "has"
+
+' Employee - Project
+employees ||--o{ employees_projects : ""
+projects  ||--o{ employees_projects : ""
+
+@enduml

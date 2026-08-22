@@ -1,0 +1,82 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+' =========================
+' Department
+' =========================
+class Department {
+    - id : String
+    - name : String
+    - location : String
+}
+
+' =========================
+' Employee hierarchy
+' =========================
+abstract class Employee {
+    - id : Long
+    - name : String
+    - email : String
+    - hireDate : LocalDate
+}
+
+class FullTimeEmployee {
+    - monthlySalary : BigDecimal
+}
+
+class PartTimeEmployee {
+    - hourlyRate : BigDecimal
+}
+
+Employee <|-- FullTimeEmployee
+Employee <|-- PartTimeEmployee
+
+' =========================
+' Employee Profile
+' =========================
+class EmployeeProfile {
+    - id : Long
+    - address : String
+    - phone : String
+    - dateOfBirth : LocalDate
+}
+
+' =========================
+' Project
+' =========================
+class Project {
+    - id : Long
+    - name : String
+    - budget : BigDecimal
+    - startDate : LocalDate
+    - endDate : LocalDate
+    - status : ProjectStatus
+}
+
+enum ProjectStatus {
+    PLANNING
+    IN_PROGRESS
+    COMPLETED
+    CANCELLED
+}
+
+' =========================
+' Relationships
+' =========================
+
+' Employee -> Department
+Department "1" <-- "0..*" Employee : department
+
+' Employee -> EmployeeProfile
+Employee "1" <-- "0..1" EmployeeProfile : employee
+
+' Employee self-join
+Employee "0..1" <-- "0..*" Employee : manager
+
+' Employee <-> Project
+Employee "0..*" -- "0..*" Project : projects
+
+Project --> ProjectStatus
+
+@enduml
