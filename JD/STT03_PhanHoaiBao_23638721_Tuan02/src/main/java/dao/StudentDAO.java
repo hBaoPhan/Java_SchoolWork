@@ -1,47 +1,46 @@
 package dao;
 
 import Util.JPAUtility;
-import entity.StudentGrade;
+import entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public class StudentGradeDAO {
-    public StudentGrade create(StudentGrade studentGrade) {
-        EntityTransaction tr = null;
+public class StudentDAO {
 
+    public Student create(Student student) {
+        EntityTransaction tr = null;
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
             tr.begin();
-            em.persist(studentGrade);
+            em.persist(student);
             tr.commit();
-            return studentGrade;
+            return student;
         } catch (Exception e) {
-            if (tr.isActive()) {
+            if (tr != null && tr.isActive()) {
                 tr.rollback();
             }
             return null;
         }
-
     }
 
-    public StudentGrade update(StudentGrade studentGrade) {
+    public Student update(Student student) {
         EntityTransaction tr = null;
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
             tr.begin();
-            em.merge(studentGrade);
-
+            em.merge(student);
             tr.commit();
-            return studentGrade;
+            return student;
         } catch (Exception e) {
-            if (tr.isActive()) {
+            if (tr != null && tr.isActive()) {
                 tr.rollback();
             }
             return null;
-
         }
     }
 
@@ -50,27 +49,31 @@ public class StudentGradeDAO {
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
             tr.begin();
-            em.remove(em.find(StudentGrade.class, id));
+            Student student = em.find(Student.class, id);
+            if (student != null) {
+                em.remove(student);
+            }
             tr.commit();
-
         } catch (Exception e) {
-            if (tr.isActive()) {
+            if (tr != null && tr.isActive()) {
                 tr.rollback();
             }
         }
     }
 
-    public Optional<StudentGrade> findById(int id) {
-        EntityManager em = JPAUtility.getEntityManager();
-        return Optional.ofNullable(em.find(StudentGrade.class, id));
+    public Optional<Student> findById(int id) {
+        try (EntityManager em = JPAUtility.getEntityManager()) {
+            return Optional.ofNullable(em.find(Student.class, id));
+        }
     }
 
-    public List<StudentGrade> findAll() {
-        EntityManager em = JPAUtility.getEntityManager();
-        return em.createQuery("SELECT p from StudentGrade p", StudentGrade.class).getResultList();
+    public List<Student> findAll() {
+        try (EntityManager em = JPAUtility.getEntityManager()) {
+            return em.createQuery("SELECT s FROM Student s", Student.class).getResultList();
+        }
     }
 
-    public java.util.Map<entity.Student, Double> getAverageScoreOfStudents() {
+    public Map<Student, Double> getAverageScoreOfStudents() {
         try (EntityManager em = JPAUtility.getEntityManager()) {
             String jpql = "SELECT sg.student, AVG(sg.grade) " +
                     "FROM StudentGrade sg " +
@@ -78,9 +81,9 @@ public class StudentGradeDAO {
                     "GROUP BY sg.student";
             List<Object[]> results = em.createQuery(jpql, Object[].class).getResultList();
 
-            java.util.Map<entity.Student, Double> map = new java.util.LinkedHashMap<>();
+            Map<Student, Double> map = new LinkedHashMap<>();
             for (Object[] row : results) {
-                entity.Student student = (entity.Student) row[0];
+                Student student = (Student) row[0];
                 Double avgGrade = (Double) row[1];
                 map.put(student, avgGrade != null ? avgGrade : 0.0);
             }
@@ -88,7 +91,7 @@ public class StudentGradeDAO {
         }
     }
 
-    public List<entity.Student> listStudentsStudyingCourseWithHighestScore(String courseName) {
+    public List<Student> listStudentsStudyingCourseWithHighestScore(String courseName) {
         try (EntityManager em = JPAUtility.getEntityManager()) {
             String jpql = "SELECT sg.student " +
                     "FROM StudentGrade sg " +
@@ -98,7 +101,7 @@ public class StudentGradeDAO {
                     "      FROM StudentGrade sg2 " +
                     "      WHERE sg2.course.title = :courseName" +
                     "  )";
-            return em.createQuery(jpql, entity.Student.class)
+            return em.createQuery(jpql, Student.class)
                     .setParameter("courseName", courseName)
                     .getResultList();
         }

@@ -1,6 +1,5 @@
 package entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -17,6 +16,9 @@ public class Student extends Person {
     @OneToMany(mappedBy = "student")
     private List<StudentGrade> studentGrades;
 
+    public Student() {
+    }
+
     public Student(LocalDateTime enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
@@ -26,7 +28,30 @@ public class Student extends Person {
         this.enrollmentDate = enrollmentDate;
     }
 
-    public Student() {
+    public LocalDateTime getEnrollmentDate() {
+        return enrollmentDate;
+    }
 
+    public void setEnrollmentDate(LocalDateTime enrollmentDate) {
+        this.enrollmentDate = enrollmentDate;
+    }
+
+    public List<StudentGrade> getStudentGrades() {
+        return studentGrades;
+    }
+
+    public void setStudentGrades(List<StudentGrade> studentGrades) {
+        this.studentGrades = studentGrades;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", enrollmentDate=" + enrollmentDate +
+                '}';
     }
 }
+
