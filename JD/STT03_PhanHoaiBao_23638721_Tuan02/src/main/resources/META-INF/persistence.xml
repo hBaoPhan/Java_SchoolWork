@@ -10,6 +10,9 @@
     <class>entity.StudentGrade</class>
     <class>entity.Course</class>
     <class>entity.OfficeAssignment</class>
+    <class>entity.Department</class>
+    <class>entity.OnlineCourse</class>
+    <class>entity.OnsiteCourse</class>
     <properties>
       <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/studentdb" />

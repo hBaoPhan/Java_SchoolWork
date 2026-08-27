@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Set;
-
+@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 public abstract class Course {
     @Id
@@ -17,4 +17,8 @@ public abstract class Course {
 
     @OneToMany(mappedBy = "course")
     private Set<StudentGrade> studentGrades;
+
+    @ManyToOne
+    @JoinColumn(name = "DepartmentId")
+    private Department department;
 }
