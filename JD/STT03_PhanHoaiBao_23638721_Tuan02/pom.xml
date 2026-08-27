@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>iuh.fit</groupId>
+  <artifactId>STT03_PhanHoaiBao_23638721</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>STT03_PhanHoaiBao_23638721_Tuan02</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <junit.version>5.9.2</junit.version>
+  </properties>
+
+  <dependencies>
+
+      <dependency>
+          <groupId>org.hibernate.orm</groupId>
+          <artifactId>hibernate-core</artifactId>
+          <version>7.4.6.Final</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.mariadb.jdbc</groupId>
+          <artifactId>mariadb-java-client</artifactId>
+          <version>3.5.10</version>
+      </dependency>
+
+
+ </dependencies>
+
+  <build>
+    <plugins>
+    </plugins>
+  </build>
+</project>
