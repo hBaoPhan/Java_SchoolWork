@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@DiscriminatorValue("INSTRUCTOR")
+@DiscriminatorValue("Instructor")
 public class Instructor extends Person{
     private LocalDateTime hireDate;
 

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("STUDENT")
+@DiscriminatorValue("Student")
 public class Student extends Person {
 
     private LocalDateTime enrollmentDate;

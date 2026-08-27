@@ -10,7 +10,7 @@ public abstract class Course {
     @Id
     @Column(name="CourseID")
     protected int id;
-    protected int credit;
+    protected int credits;
     protected String title;
     @ManyToMany(mappedBy = "courses")
     private Set<Instructor> instructors;

@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class StudentGrade {
     @Id
     private int enrollmentID;
-
+    @Column(nullable = true)
     private double grade;
 
     @ManyToOne

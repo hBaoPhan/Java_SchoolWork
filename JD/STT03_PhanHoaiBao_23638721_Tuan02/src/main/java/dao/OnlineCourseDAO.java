@@ -1,16 +1,15 @@
 package dao;
 
 import Util.JPAUtility;
-import entity.Course;
-import entity.Person;
+import entity.OnlineCourse ;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 import java.util.Optional;
 
-public class CourseDAO {
-    public Course create(Course course){
+public class OnlineCourseDAO {
+    public OnlineCourse create(OnlineCourse course){
         EntityTransaction tr=null;
 
         try(EntityManager em= JPAUtility.getEntityManager()){
@@ -27,7 +26,7 @@ public class CourseDAO {
         }
 
     }
-    public Course update(Course course){
+    public OnlineCourse update(OnlineCourse course){
         EntityTransaction tr=null;
         try(EntityManager em=JPAUtility.getEntityManager()){
             tr=em.getTransaction();
@@ -49,7 +48,7 @@ public class CourseDAO {
         try(EntityManager em=JPAUtility.getEntityManager()){
             tr=em.getTransaction();
             tr.begin();
-            em.remove(em.find(Course.class,id));
+            em.remove(em.find(OnlineCourse .class,id));
             tr.commit();
 
 
@@ -59,12 +58,12 @@ public class CourseDAO {
             }
         }
     }
-    public Optional<Course> findById(int id){
+    public Optional<OnlineCourse > findById(int id){
         EntityManager em=JPAUtility.getEntityManager();
-        return Optional.ofNullable(em.find(Course.class,id));
+        return Optional.ofNullable(em.find(OnlineCourse .class,id));
     }
-    public List<Course> findAll(){
+    public List<OnlineCourse > findAll(){
         EntityManager em=JPAUtility.getEntityManager();
-        return em.createQuery("SELECT p from Course p", Course.class).getResultList();
+        return em.createQuery("SELECT p from OnlineCourse p", OnlineCourse.class).getResultList();
     }
 }

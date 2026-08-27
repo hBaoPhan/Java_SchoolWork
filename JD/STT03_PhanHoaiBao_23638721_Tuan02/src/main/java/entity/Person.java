@@ -24,4 +24,13 @@ public abstract class Person {
         this.id = id;
         this.lastName = lastName;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", id=" + id +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
