@@ -9,7 +9,6 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("INSTRUCTOR")
 public class Instructor extends Person{
-    @Column(name = "hire_date")
     private LocalDateTime hireDate;
 
     @ManyToMany
