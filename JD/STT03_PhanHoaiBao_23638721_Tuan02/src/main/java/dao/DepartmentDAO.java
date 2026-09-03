@@ -5,6 +5,7 @@ import entity.Department;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -81,7 +82,7 @@ public class DepartmentDAO {
                     "ORDER BY COUNT(DISTINCT sg.student) DESC";
             List<Object[]> results = em.createQuery(jpql, Object[].class).getResultList();
 
-            java.util.Map<Department, Long> map = new java.util.LinkedHashMap<>();
+            Map<Department, Long> map = new LinkedHashMap<>();
             for (Object[] row : results) {
                 Department dept = (Department) row[0];
                 Long count = (Long) row[1];
