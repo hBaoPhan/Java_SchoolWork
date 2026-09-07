@@ -1,9 +1,8 @@
 package entity;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @AttributeOverride(name = "id",column = @Column(name = "staff_id"))
@@ -11,6 +10,17 @@ import jakarta.persistence.Table;
 public class Staff extends Person{
 
     private byte active;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+    @OneToMany(mappedBy = "manager")
+    private Set<Staff> staffs;
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Staff manager;
 
     public Staff() {
     }
