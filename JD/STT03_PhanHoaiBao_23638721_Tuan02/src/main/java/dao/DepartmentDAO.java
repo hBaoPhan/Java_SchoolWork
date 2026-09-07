@@ -71,23 +71,17 @@ public class DepartmentDAO {
         return em.createQuery("SELECT p from Department p", Department.class).getResultList();
     }
 
-    public Map<Department, Long> getNumberOfStudentsByDepartment() {
+    public List<Object[]> getNumberOfStudentsByDepartment() {
+        String jpql = "SELECT d, COUNT(DISTINCT sg.student) " +
+                "FROM Department d " +
+                "LEFT JOIN d.courses c " +
+                "LEFT JOIN c.studentGrades sg " +
+                "GROUP BY d " +
+                "ORDER BY COUNT(DISTINCT sg.student) DESC";
         try (EntityManager em = JPAUtility.getEntityManager()) {
-            String jpql = "SELECT d, COUNT(DISTINCT sg.student) " +
-                    "FROM Department d " +
-                    "LEFT JOIN d.courses c " +
-                    "LEFT JOIN c.studentGrades sg " +
-                    "GROUP BY d " +
-                    "ORDER BY COUNT(DISTINCT sg.student) DESC";
-            List<Object[]> results = em.createQuery(jpql, Object[].class).getResultList();
+           return em.createQuery(jpql, Object[].class).getResultList();
 
-            java.util.Map<Department, Long> map = new java.util.LinkedHashMap<>();
-            for (Object[] row : results) {
-                Department dept = (Department) row[0];
-                Long count = (Long) row[1];
-                map.put(dept, count);
-            }
-            return map;
+
         }
     }
 

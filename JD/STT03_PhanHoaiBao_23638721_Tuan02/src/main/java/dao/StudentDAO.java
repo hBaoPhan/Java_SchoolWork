@@ -73,21 +73,15 @@ public class StudentDAO {
         }
     }
 
-    public Map<Student, Double> getAverageScoreOfStudents() {
+    public List<Object[]> getAverageScoreOfStudents() {
         try (EntityManager em = JPAUtility.getEntityManager()) {
             String jpql = "SELECT sg.student, AVG(sg.grade) " +
                     "FROM StudentGrade sg " +
                     "WHERE sg.student IS NOT NULL " +
                     "GROUP BY sg.student";
-            List<Object[]> results = em.createQuery(jpql, Object[].class).getResultList();
+            return em.createQuery(jpql, Object[].class).getResultList();
 
-            Map<Student, Double> map = new LinkedHashMap<>();
-            for (Object[] row : results) {
-                Student student = (Student) row[0];
-                Double avgGrade = (Double) row[1];
-                map.put(student, avgGrade != null ? avgGrade : 0.0);
-            }
-            return map;
+
         }
     }
 
