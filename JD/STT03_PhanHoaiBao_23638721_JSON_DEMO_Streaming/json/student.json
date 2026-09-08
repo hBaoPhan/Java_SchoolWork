@@ -1,0 +1,11 @@
+{
+    "id": 100,
+    "first_name": "Bao",
+    "last_name": "Phan",
+    "age": 20,
+    "address": {
+        "street": "12 NVB",
+        "ward": "Hanh thong",
+        "city": "HCM"
+    }
+}
