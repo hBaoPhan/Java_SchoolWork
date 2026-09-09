@@ -14,7 +14,7 @@ public class Order {
     @Column(name = "order_id")
     private int id;
 
-    @Column(name = "order_status")
+    @Column(name = "order_status",columnDefinition = "TINYINT")
     private byte orderStatus;
 
     @Column(name = "order_date")

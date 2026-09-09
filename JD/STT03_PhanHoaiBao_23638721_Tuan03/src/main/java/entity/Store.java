@@ -10,7 +10,7 @@ public class Store {
     @Column(name = "store_id")
     private int id;
 
-    @Column(name = "store_name")
+    @Column(name = "store_name",columnDefinition = "NVARCHAR(255)")
     private String name;
 
     @Embedded

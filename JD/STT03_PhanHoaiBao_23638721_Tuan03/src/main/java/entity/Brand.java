@@ -12,7 +12,7 @@ public class Brand {
     @Column(name = "brand_id")
     private int id;
 
-    @Column(name = "brand_name")
+    @Column(name = "brand_name", columnDefinition = "NVARCHAR(255)")
     private String name;
 
     @OneToMany(mappedBy = "brand")

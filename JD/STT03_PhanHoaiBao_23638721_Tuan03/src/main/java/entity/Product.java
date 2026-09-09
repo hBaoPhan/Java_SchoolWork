@@ -12,13 +12,13 @@ public class Product {
     @Column(name = "product_id")
     private int id;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name",columnDefinition = "NVARCHAR(255)")
     private String name;
 
     @Column(name = "model_year")
     private int modelYear;
 
-    @Column(name = "list_price")
+    @Column(name = "list_price",columnDefinition = "DECIMAL(10,2)")
     private double listPrice;
 
     @ManyToOne

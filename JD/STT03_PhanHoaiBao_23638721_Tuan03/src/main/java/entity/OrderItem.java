@@ -19,9 +19,9 @@ public class OrderItem {
 
     private int quantity;
 
-    @Column(name = "list_price")
+    @Column(name = "list_price",columnDefinition = "DECIMAL(10,2)")
     private double listPrice;
 
-    @Column(name = "discount")
+    @Column(name = "discount",columnDefinition = "DECIMAL(4,2)")
     private double discount;
 }
