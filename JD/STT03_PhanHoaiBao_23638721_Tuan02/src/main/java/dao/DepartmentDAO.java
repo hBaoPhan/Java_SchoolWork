@@ -71,7 +71,7 @@ public class DepartmentDAO {
         return em.createQuery("SELECT p from Department p", Department.class).getResultList();
     }
 
-    public List<Object[]> getNumberOfStudentsByDepartment() {
+    public  Map<Department, Long> getNumberOfStudentsByDepartment() {
         String jpql = "SELECT d, COUNT(DISTINCT sg.student) " +
                 "FROM Department d " +
                 "LEFT JOIN d.courses c " +
@@ -79,12 +79,17 @@ public class DepartmentDAO {
                 "GROUP BY d " +
                 "ORDER BY COUNT(DISTINCT sg.student) DESC";
         try (EntityManager em = JPAUtility.getEntityManager()) {
-           return em.createQuery(jpql, Object[].class).getResultList();
+            List<Object[]> results = em.createQuery(jpql, Object[].class).getResultList();
 
-
+            Map<Department, Long> map = new java.util.LinkedHashMap<>();
+            for (Object[] row : results) {
+                Department dept = (Department) row[0];
+                Long count = (Long) row[1];
+                map.put(dept, count);
+            }
+            return map;
         }
     }
-
     public List<Department> listDepartmentsWithoutStudents() {
         try (EntityManager em = JPAUtility.getEntityManager()) {
             String jpql = "SELECT d FROM Department d WHERE NOT EXISTS (" +

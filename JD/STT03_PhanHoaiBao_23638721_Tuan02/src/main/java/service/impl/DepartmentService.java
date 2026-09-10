@@ -1,20 +1,23 @@
 package service.impl;
 
 import dao.DepartmentDAO;
+import dto.DepartmentRequestDTO;
 import dto.DepartmentResponseDTO;
 import entity.Department;
 import mapper.DepartmentMapper;
 import service.DepartmentInterface;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class DepartmentService implements DepartmentInterface {
-    private DepartmentDAO departmentDAO=new DepartmentDAO();
+    private final DepartmentDAO departmentDAO=new DepartmentDAO();
     @Override
-    public void create(Department department) {
-        departmentDAO.create(department);
+    public void create(DepartmentRequestDTO departmentRequestDTO) {
+
+        departmentDAO.create(DepartmentMapper.toEntity(departmentRequestDTO));
     }
 
     @Override
@@ -23,8 +26,9 @@ public class DepartmentService implements DepartmentInterface {
     }
 
     @Override
-    public void update(Department department) {
-        departmentDAO.update(department);
+    public void update(DepartmentRequestDTO departmentRequestDTO) {
+
+        departmentDAO.update(DepartmentMapper.toEntity(departmentRequestDTO));
     }
 
     @Override
@@ -36,20 +40,26 @@ public class DepartmentService implements DepartmentInterface {
     public List<DepartmentResponseDTO> findAll() {
         return departmentDAO.findAll()
                 .stream()
-                .map(DepartmentResponseDTO::new)
+                .map(DepartmentMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<DepartmentResponseDTO> getNumberOfStudentsByDepartment() {
-        return departmentDAO.getNumberOfStudentsByDepartment()
-                .stream()
-                .map(DepartmentResponseDTO::new)
-                .collect(Collectors.toList());
+    public Map<DepartmentResponseDTO, Long> getNumberOfStudentsByDepartment() {
+       return departmentDAO.getNumberOfStudentsByDepartment()
+               .entrySet()
+               .stream()
+               .collect(Collectors.toMap(e -> DepartmentMapper.toDTO(e.getKey()),
+                       Map.Entry::getValue));
+
     }
 
     @Override
     public List<DepartmentResponseDTO> listDepartmentsWithoutStudents() {
-        return null;
+
+       return departmentDAO.listDepartmentsWithoutStudents()
+               .stream()
+               .map(DepartmentMapper::toDTO)
+               .collect(Collectors.toList());
     }
 }
