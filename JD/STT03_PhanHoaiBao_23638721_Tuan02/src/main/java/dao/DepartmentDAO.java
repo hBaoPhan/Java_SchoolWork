@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class DepartmentDAO {
-    public Department create(Department department) {
+    public void create(Department department) {
         EntityTransaction tr = null;
 
         try (EntityManager em = JPAUtility.getEntityManager()) {
@@ -18,17 +18,17 @@ public class DepartmentDAO {
             tr.begin();
             em.persist(department);
             tr.commit();
-            return department;
+
         } catch (Exception e) {
             if (tr.isActive()) {
                 tr.rollback();
             }
-            return null;
+
         }
 
     }
 
-    public Department update(Department department) {
+    public void update(Department department) {
         EntityTransaction tr = null;
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
@@ -36,12 +36,12 @@ public class DepartmentDAO {
             em.merge(department);
 
             tr.commit();
-            return department;
+
         } catch (Exception e) {
             if (tr.isActive()) {
                 tr.rollback();
             }
-            return null;
+
 
         }
     }
