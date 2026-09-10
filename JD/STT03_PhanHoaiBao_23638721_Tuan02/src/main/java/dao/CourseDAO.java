@@ -11,35 +11,35 @@ import java.util.Optional;
 
 public class CourseDAO {
 
-    public Course create(Course course) {
+    public void create(Course course) {
         EntityTransaction tr = null;
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
             tr.begin();
             em.persist(course);
             tr.commit();
-            return course;
+
         } catch (Exception e) {
             if (tr != null && tr.isActive()) {
                 tr.rollback();
             }
-            return null;
+
         }
     }
 
-    public Course update(Course course) {
+    public void update(Course course) {
         EntityTransaction tr = null;
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
             tr.begin();
             em.merge(course);
             tr.commit();
-            return course;
+
         } catch (Exception e) {
             if (tr != null && tr.isActive()) {
                 tr.rollback();
             }
-            return null;
+
         }
     }
 

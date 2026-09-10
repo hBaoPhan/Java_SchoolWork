@@ -53,10 +53,8 @@ public class DepartmentService implements DepartmentInterface {
                        Map.Entry::getValue));
 
     }
-
     @Override
     public List<DepartmentResponseDTO> listDepartmentsWithoutStudents() {
-
        return departmentDAO.listDepartmentsWithoutStudents()
                .stream()
                .map(DepartmentMapper::toDTO)

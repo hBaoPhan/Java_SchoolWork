@@ -12,35 +12,35 @@ import java.util.Optional;
 
 public class StudentDAO {
 
-    public Student create(Student student) {
+    public void create(Student student) {
         EntityTransaction tr = null;
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
             tr.begin();
             em.persist(student);
             tr.commit();
-            return student;
+
         } catch (Exception e) {
             if (tr != null && tr.isActive()) {
                 tr.rollback();
             }
-            return null;
+
         }
     }
 
-    public Student update(Student student) {
+    public void update(Student student) {
         EntityTransaction tr = null;
         try (EntityManager em = JPAUtility.getEntityManager()) {
             tr = em.getTransaction();
             tr.begin();
             em.merge(student);
             tr.commit();
-            return student;
+
         } catch (Exception e) {
             if (tr != null && tr.isActive()) {
                 tr.rollback();
             }
-            return null;
+
         }
     }
 
@@ -73,13 +73,18 @@ public class StudentDAO {
         }
     }
 
-    public List<Object[]> getAverageScoreOfStudents() {
+    public Map<Student,Long> getAverageScoreOfStudents() {
         try (EntityManager em = JPAUtility.getEntityManager()) {
             String jpql = "SELECT sg.student, AVG(sg.grade) " +
                     "FROM StudentGrade sg " +
                     "WHERE sg.student IS NOT NULL " +
                     "GROUP BY sg.student";
-            return em.createQuery(jpql, Object[].class).getResultList();
+            List<Object[]> list= em.createQuery(jpql, Object[].class).getResultList();
+            Map<Student,Long> map=new LinkedHashMap<>();
+            for (Object[] object : list) {
+                map.put((Student) object[0],(Long) object[1]);
+            }
+            return map;
 
 
         }
