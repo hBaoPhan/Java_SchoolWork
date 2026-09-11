@@ -1,6 +1,6 @@
 package dao;
 
-import Util.JPAUtility;
+import util.JPAUtility;
 import entity.OnlineCourse ;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;

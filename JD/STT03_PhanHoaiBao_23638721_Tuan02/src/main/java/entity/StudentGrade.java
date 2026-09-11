@@ -22,11 +22,10 @@ public class StudentGrade {
     public StudentGrade() {
     }
 
-    public StudentGrade(int enrollmentID, double grade, Student student, Course course) {
+    public StudentGrade(int enrollmentID, double grade) {
         this.enrollmentID = enrollmentID;
         this.grade = grade;
-        this.student = student;
-        this.course = course;
+
     }
 
     public int getEnrollmentID() {
