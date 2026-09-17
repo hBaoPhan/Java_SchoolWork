@@ -1,0 +1,16 @@
+[
+  {
+    "StateName": "Alabama",
+    "Abbreviation": "AL",
+    "Capital": "Montgomery",
+    "Statehood": 1819,
+    "ID": 1
+  },
+  {
+    "StateName": "Alaska",
+    "Abbreviation": "AK",
+    "Capital": "Juneau",
+    "Statehood": 1,
+    "ID": 2
+    }
+]
