@@ -47,13 +47,17 @@ public class JsonUtil {
     public static List<State> toState(String filename){
 
         try(JsonReader reader= Json.createReader(new FileReader(filename))){
-            JsonArray jsonArray=reader.readObject().asJsonArray();
+            JsonArray jsonArray=reader.readArray();
             return jsonArray.getValuesAs(JsonObject.class)
                     .stream()
                     .map(obj -> new State(obj.getString("StateName"),
-                            obj.getString("Abbreviation"),obj.getString("Capital", obj.getInt("State")) ))
+                            obj.getString("Abbreviation"),
+                            obj.getString("Capital"),
+                            obj.getInt("Statehood"),
+                            obj.getInt("ID") )).collect(Collectors.toList());
         }catch (Exception e){
-
+            e.printStackTrace();
+                return null;
         }
     }
 }

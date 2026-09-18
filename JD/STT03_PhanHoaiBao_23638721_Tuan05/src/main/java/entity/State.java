@@ -12,6 +12,5 @@ public class State {
     private String Abbreviation;
     private String Capital;
     private int Statehood;
-
     private int ID;
 }

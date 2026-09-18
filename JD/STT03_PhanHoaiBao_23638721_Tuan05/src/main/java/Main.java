@@ -1,10 +1,16 @@
 import entity.Person;
+import entity.PhoneNumber;
+import entity.State;
 import jsonUtil.JsonUtil;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        Person person=JsonUtil.toPerson("json/person.json");
-        System.out.println(person);
+//        java.util.List<State> phoneNumberList =JsonUtil.toState("json/state.json");
+//        System.out.println(phoneNumberList);
+
+
     }
 }
