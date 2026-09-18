@@ -1,0 +1,102 @@
+package dao;
+
+import util.JPAUtility;
+import entity.Department;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+public class DepartmentDAO {
+    public void create(Department department) {
+        EntityTransaction tr = null;
+
+        try (EntityManager em = JPAUtility.getEntityManager()) {
+            tr = em.getTransaction();
+            tr.begin();
+            em.persist(department);
+            tr.commit();
+
+        } catch (Exception e) {
+            if (tr.isActive()) {
+                tr.rollback();
+            }
+
+        }
+
+    }
+
+    public void update(Department department) {
+        EntityTransaction tr = null;
+        try (EntityManager em = JPAUtility.getEntityManager()) {
+            tr = em.getTransaction();
+            tr.begin();
+            em.merge(department);
+
+            tr.commit();
+
+        } catch (Exception e) {
+            if (tr.isActive()) {
+                tr.rollback();
+            }
+
+
+        }
+    }
+
+    public void delete(int id) {
+        EntityTransaction tr = null;
+        try (EntityManager em = JPAUtility.getEntityManager()) {
+            tr = em.getTransaction();
+            tr.begin();
+            em.remove(em.find(Department.class, id));
+            tr.commit();
+
+        } catch (Exception e) {
+            if (tr.isActive()) {
+                tr.rollback();
+            }
+        }
+    }
+
+    public Optional<Department> findById(int id) {
+        EntityManager em = JPAUtility.getEntityManager();
+        return Optional.ofNullable(em.find(Department.class, id));
+    }
+
+    public List<Department> findAll() {
+        EntityManager em = JPAUtility.getEntityManager();
+        return em.createQuery("SELECT p from Department p", Department.class).getResultList();
+    }
+
+    public  Map<Department, Long> getNumberOfStudentsByDepartment() {
+        String jpql = "SELECT d, COUNT(DISTINCT sg.student) " +
+                "FROM Department d " +
+                "LEFT JOIN d.courses c " +
+                "LEFT JOIN c.studentGrades sg " +
+                "GROUP BY d " +
+                "ORDER BY COUNT(DISTINCT sg.student) DESC";
+        try (EntityManager em = JPAUtility.getEntityManager()) {
+            List<Object[]> results = em.createQuery(jpql, Object[].class).getResultList();
+
+            Map<Department, Long> map = new LinkedHashMap<>();
+            for (Object[] row : results) {
+                Department dept = (Department) row[0];
+                Long count = (Long) row[1];
+                map.put(dept, count);
+            }
+            return map;
+        }
+    }
+    public List<Department> listDepartmentsWithoutStudents() {
+        try (EntityManager em = JPAUtility.getEntityManager()) {
+            String jpql = "SELECT d FROM Department d WHERE NOT EXISTS (" +
+                    "  SELECT 1 FROM StudentGrade sg JOIN sg.course c WHERE c.department = d" +
+                    ")";
+            return em.createQuery(jpql, Department.class).getResultList();
+        }
+    }
+}
