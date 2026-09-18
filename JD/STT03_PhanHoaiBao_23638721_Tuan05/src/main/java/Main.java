@@ -11,6 +11,9 @@ public class Main {
 //        java.util.List<State> phoneNumberList =JsonUtil.toState("json/state.json");
 //        System.out.println(phoneNumberList);
 
+        Person person=JsonUtil.findByFirstName("Jon");
+        System.out.println(person);
+
 
     }
 }

@@ -5,7 +5,9 @@ import entity.Person;
 import entity.PhoneNumber;
 import entity.State;
 import jakarta.json.*;
+import jakarta.json.stream.JsonParser;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,5 +61,97 @@ public class JsonUtil {
             e.printStackTrace();
                 return null;
         }
+    }
+
+    public static Person findByFirstName(String firstName){
+        Person person=null;
+        String keyName="";
+        Address address=null;
+        List<PhoneNumber> phoneNumbers=null;
+        PhoneNumber phoneNumber=null;
+        try(JsonParser parser=Json.createParser(new FileReader("json/person.json"))){
+            while (parser.hasNext()){
+                JsonParser.Event event=parser.next();
+                switch (event){
+                    case START_ARRAY ->{
+                        if(keyName.equals("phoneNumbers")){
+                            phoneNumbers=new ArrayList<>();
+                        }
+
+
+                    }
+                    case START_OBJECT -> {
+                        if(person==null){
+                            person=new Person();
+//                        person.setAddress(new Address());
+                        } else if (keyName.equals("address")) {
+                            address=new Address();
+                        } else if (phoneNumbers!=null && phoneNumber==null) {
+                            phoneNumber=new PhoneNumber();
+                        }
+
+                    }
+                    case KEY_NAME -> {
+                        keyName=parser.getString();
+//                        System.out.println(keyName);
+                    }
+                    case VALUE_NUMBER -> {
+                        if(keyName.equals("age")){
+
+                            person.setAge(parser.getInt());
+                        }
+
+                    }
+                    case VALUE_STRING -> {
+                        if(keyName.equals("firstName")){
+                            person.setFirstName(parser.getString());
+                        }else if(keyName.equals("lastName")){
+                            person.setLastName(parser.getString());
+                        } else if (keyName.equals("streetAddress")) {
+                            address.setStreetAddress(parser.getString());
+                            
+                        }else if(keyName.equals("city")){
+                            address.setCity(parser.getString());
+                        } else if (keyName.equals("state")) {
+                            address.setState(parser.getString());
+                        } else if (keyName.equals("postalCode")) {
+                            address.setPostalCode(parser.getInt());
+                        } else if (keyName.equals("type")) {
+                            phoneNumber.setType(parser.getString());
+                        } else if (keyName.equals("number")) {
+                            phoneNumber.setNumber(parser.getString());
+                        }
+
+                    }
+                    case END_ARRAY -> {
+                        person.setPhoneNumbers(phoneNumbers);
+                        phoneNumbers=null;
+
+                    }
+                    case END_OBJECT -> {
+                        if(address!=null){
+                            person.setAddress(address);
+
+                        }
+                        if (phoneNumber!=null){
+                            phoneNumbers.add(phoneNumber);
+                            phoneNumber=null;
+
+
+                        }
+
+                         if(person.getFirstName().equals(firstName)){
+                            return person;
+                        }
+
+
+                    }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return person;
     }
 }
