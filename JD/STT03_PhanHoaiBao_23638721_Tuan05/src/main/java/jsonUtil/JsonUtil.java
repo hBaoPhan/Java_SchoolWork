@@ -133,14 +133,14 @@ public class JsonUtil {
                             person.setAddress(address);
 
                         }
-                        if (phoneNumber!=null){
+                         if (phoneNumber!=null){
                             phoneNumbers.add(phoneNumber);
                             phoneNumber=null;
 
 
                         }
 
-                         if(person.getFirstName().equals(firstName)){
+                         else if(person.getFirstName().equals(firstName)){
                             return person;
                         }
 

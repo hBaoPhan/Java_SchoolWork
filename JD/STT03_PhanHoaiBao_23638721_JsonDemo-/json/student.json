@@ -1,0 +1,14 @@
+{
+    "first_name": "Bao",
+    "last_name": "Liu",
+    "age": 99,
+    "phones": [
+        "0335335335",
+        "0335335336"
+    ],
+    "address": {
+        "street": "12 Nguyen Van Bao",
+        "ward": "Hanh Thong",
+        "city": "Ho Chi Minh"
+    }
+}
