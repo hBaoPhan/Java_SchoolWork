@@ -7,7 +7,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 public class Person {
     private String firstName;
@@ -15,4 +14,12 @@ public class Person {
     private int age;
     private Address address;
     private List<PhoneNumber> phoneNumbers;
+
+    public Person(String firstName, String lastName, int age, Address address, List<PhoneNumber> phoneNumbers) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.address = address;
+        this.phoneNumbers = phoneNumbers;
+    }
 }
