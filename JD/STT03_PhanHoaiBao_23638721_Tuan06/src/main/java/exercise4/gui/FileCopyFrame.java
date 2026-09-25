@@ -6,11 +6,6 @@ import java.awt.*;
 import java.io.*;
 import java.util.List;
 
-/**
- * Exercise 4: GUI Application that copies files.
- * Uses a JProgressBar to display the progress of the copying operation.
- * Copying is performed on a background thread (SwingWorker) to keep the GUI responsive.
- */
 public class FileCopyFrame extends JFrame {
     private final JTextField txtFrom;
     private final JTextField txtTo;
@@ -130,7 +125,8 @@ public class FileCopyFrame extends JFrame {
         String toPath = txtTo.getText().trim();
 
         if (fromPath.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter or select a source file.", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter or select a source file.", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -141,7 +137,8 @@ public class FileCopyFrame extends JFrame {
         }
 
         if (toPath.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter or select a destination path.", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter or select a destination path.", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -152,7 +149,8 @@ public class FileCopyFrame extends JFrame {
         }
 
         if (sourceFile.getAbsolutePath().equalsIgnoreCase(destFile.getAbsolutePath())) {
-            JOptionPane.showMessageDialog(this, "Source and destination cannot be identical!", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Source and destination cannot be identical!", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -173,7 +171,7 @@ public class FileCopyFrame extends JFrame {
             protected Void doInBackground() throws Exception {
                 byte[] buffer = new byte[64 * 1024]; // 64 KB buffer
                 try (InputStream in = new BufferedInputStream(new FileInputStream(finalSource));
-                     OutputStream out = new BufferedOutputStream(new FileOutputStream(finalDest))) {
+                        OutputStream out = new BufferedOutputStream(new FileOutputStream(finalDest))) {
 
                     int bytesRead;
                     while ((bytesRead = in.read(buffer)) != -1) {
@@ -232,7 +230,8 @@ public class FileCopyFrame extends JFrame {
     }
 
     private String formatBytes(long bytes) {
-        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024)
+            return bytes + " B";
         int exp = (int) (Math.log(bytes) / Math.log(1024));
         char pre = "KMGTPE".charAt(exp - 1);
         return String.format("%.1f %cB", bytes / Math.pow(1024, exp), pre);

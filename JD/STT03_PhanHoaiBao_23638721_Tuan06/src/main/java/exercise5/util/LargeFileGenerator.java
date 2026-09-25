@@ -5,17 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- * Utility to generate a ~20MB text file for testing multi-threaded loading in Exercise 5.
- */
 public class LargeFileGenerator {
 
-    /**
-     * Generates a sample text file of approximately targetSizeMB.
-     * @param targetFile destination file
-     * @param targetSizeMB size in megabytes (e.g., 20)
-     * @throws IOException if writing fails
-     */
     public static void generateSampleTextFile(File targetFile, int targetSizeMB) throws IOException {
         long targetBytes = (long) targetSizeMB * 1024 * 1024;
         long writtenBytes = 0;
