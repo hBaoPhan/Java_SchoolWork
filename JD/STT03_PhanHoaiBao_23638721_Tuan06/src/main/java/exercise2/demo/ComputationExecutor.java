@@ -1,6 +1,6 @@
-package thread;
+package exercise2.demo;
 
-import thread.ComputationTask;
+import exercise2.thread.ComputationTask;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;

@@ -1,4 +1,4 @@
-package thread;
+package exercise1.thread;
 
 import java.util.concurrent.Callable;
 
