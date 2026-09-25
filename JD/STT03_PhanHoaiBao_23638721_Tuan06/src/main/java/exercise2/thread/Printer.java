@@ -1,8 +1,5 @@
 package exercise2.thread;
 
-/**
- * Printer thread reads values from Storage and prints them.
- */
 public class Printer implements Runnable {
     private final Storage storage;
     private final int count;

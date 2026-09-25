@@ -1,9 +1,5 @@
 package exercise2.thread;
 
-/**
- * Counter thread starts counting from 0 (0, 1, 2, 3...)
- * and stores each value in the Storage instance.
- */
 public class Counter implements Runnable {
     private final Storage storage;
     private final int limit;

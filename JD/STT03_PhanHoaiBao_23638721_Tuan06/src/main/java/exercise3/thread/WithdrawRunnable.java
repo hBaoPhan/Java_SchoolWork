@@ -2,9 +2,6 @@ package exercise3.thread;
 
 import exercise3.account.BankAccount;
 
-/**
- * Task that repeatedly withdraws money from a BankAccount.
- */
 public class WithdrawRunnable implements Runnable {
     private final BankAccount account;
     private final double amount;

@@ -4,14 +4,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * BankAccount implementation using java.util.concurrent.locks.ReentrantLock and Condition.
- * Requirements:
- * 1. Lock object synchronization.
- * 2. Restricting deposits to $100,000 (insurance limit of US government).
- *    The deposit method blocks until sufficient money has been withdrawn.
- *    The withdraw method blocks until sufficient money has been deposited.
- */
 public class LockBankAccount implements BankAccount {
     public static final double MAX_BALANCE = 100_000.0;
 
@@ -36,7 +28,8 @@ public class LockBankAccount implements BankAccount {
         balanceChangeLock.lock();
         try {
             while (balance + amount > MAX_BALANCE) {
-                System.out.printf("[%s] Deposit of $%.2f BLOCKED. Balance ($%.2f) + $%.2f > $%.2f limit. Waiting for withdrawal...%n",
+                System.out.printf(
+                        "[%s] Deposit of $%.2f BLOCKED. Balance ($%.2f) + $%.2f > $%.2f limit. Waiting for withdrawal...%n",
                         Thread.currentThread().getName(), amount, balance, amount, MAX_BALANCE);
                 belowLimitCondition.await();
             }
@@ -56,7 +49,8 @@ public class LockBankAccount implements BankAccount {
         balanceChangeLock.lock();
         try {
             while (balance < amount) {
-                System.out.printf("[%s] Withdrawal of $%.2f BLOCKED. Insufficient balance ($%.2f). Waiting for deposit...%n",
+                System.out.printf(
+                        "[%s] Withdrawal of $%.2f BLOCKED. Insufficient balance ($%.2f). Waiting for deposit...%n",
                         Thread.currentThread().getName(), amount, balance);
                 sufficientFundsCondition.await();
             }

@@ -2,9 +2,6 @@ package exercise3.thread;
 
 import exercise3.account.BankAccount;
 
-/**
- * Task that repeatedly deposits money into a BankAccount.
- */
 public class DepositRunnable implements Runnable {
     private final BankAccount account;
     private final double amount;

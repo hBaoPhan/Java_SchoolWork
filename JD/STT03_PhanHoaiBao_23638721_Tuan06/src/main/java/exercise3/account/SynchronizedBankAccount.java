@@ -21,11 +21,7 @@ public class SynchronizedBankAccount implements BankAccount {
     public void deposit(double amount) {
         if (useBlockSynchronization) {
             synchronized (lock) {
-                double newBalance = balance + amount;
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException ignored) {}
-                balance = newBalance;
+                balance += amount;
             }
         } else {
             depositMethodSync(amount);
@@ -33,22 +29,14 @@ public class SynchronizedBankAccount implements BankAccount {
     }
 
     private synchronized void depositMethodSync(double amount) {
-        double newBalance = balance + amount;
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException ignored) {}
-        balance = newBalance;
+        balance += amount;
     }
 
     @Override
     public void withdraw(double amount) {
         if (useBlockSynchronization) {
             synchronized (lock) {
-                double newBalance = balance - amount;
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException ignored) {}
-                balance = newBalance;
+                balance -= amount;
             }
         } else {
             withdrawMethodSync(amount);
@@ -56,11 +44,7 @@ public class SynchronizedBankAccount implements BankAccount {
     }
 
     private synchronized void withdrawMethodSync(double amount) {
-        double newBalance = balance - amount;
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException ignored) {}
-        balance = newBalance;
+        balance -= amount;
     }
 
     @Override

@@ -5,10 +5,6 @@ import exercise3.account.SynchronizedBankAccount;
 import exercise3.thread.DepositRunnable;
 import exercise3.thread.WithdrawRunnable;
 
-/**
- * Exercise 3 - Part 1 Solution:
- * Uses synchronized methods and synchronized blocks to resolve thread conflict.
- */
 public class BankAccountSynchronizedDemo {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("=== Testing Method Synchronization ===");
@@ -28,8 +24,10 @@ public class BankAccountSynchronizedDemo {
         Thread[] withdrawThreads = new Thread[NUM_THREADS];
 
         for (int i = 0; i < NUM_THREADS; i++) {
-            depositThreads[i] = new Thread(new DepositRunnable(account, AMOUNT, REPETITIONS, 0), "SyncDeposit-" + (i + 1));
-            withdrawThreads[i] = new Thread(new WithdrawRunnable(account, AMOUNT, REPETITIONS, 0), "SyncWithdraw-" + (i + 1));
+            depositThreads[i] = new Thread(new DepositRunnable(account, AMOUNT, REPETITIONS, 0),
+                    "SyncDeposit-" + (i + 1));
+            withdrawThreads[i] = new Thread(new WithdrawRunnable(account, AMOUNT, REPETITIONS, 0),
+                    "SyncWithdraw-" + (i + 1));
         }
 
         for (int i = 0; i < NUM_THREADS; i++) {

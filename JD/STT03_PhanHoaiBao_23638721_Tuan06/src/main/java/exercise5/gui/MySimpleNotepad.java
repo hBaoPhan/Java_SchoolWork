@@ -9,11 +9,6 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.List;
 
-/**
- * Exercise 5: Simple Notepad application ("Tý tèo simple Notepad").
- * Supports opening large text files (~20MB) using multi-threading (SwingWorker)
- * so that the user interface never freezes.
- */
 public class MySimpleNotepad extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
@@ -266,7 +261,8 @@ public class MySimpleNotepad extends JFrame implements ActionListener {
             setTitle("Tý tèo simple Notepad - " + currentFile.getName());
             lblStatus.setText(" Đã lưu: " + currentFile.getName());
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi khi lưu tập tin: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Lỗi khi lưu tập tin: " + ex.getMessage(), "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -324,7 +320,8 @@ public class MySimpleNotepad extends JFrame implements ActionListener {
     }
 
     private String formatBytes(long bytes) {
-        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024)
+            return bytes + " B";
         int exp = (int) (Math.log(bytes) / Math.log(1024));
         char pre = "KMGTPE".charAt(exp - 1);
         return String.format("%.1f %cB", bytes / Math.pow(1024, exp), pre);
