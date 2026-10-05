@@ -65,7 +65,7 @@ public class CarDAO {
         }
     }
 
-    public List<Object[]> getCOntractByCustomer(String id){
+    public List<Object[]> getContractByCustomer(String id){
         String query="select c.id, c.carName, rc.startDate, rc.endDate, rc.contractStatus"
                 + " from Car c join c.rentalContracts rc"
               +  " where rc.customer.id = : customerId";

@@ -5,7 +5,7 @@ import dto.request.CarRequestDTO;
 import entity.Car;
 
 public class CarMapper {
-    public Car toEntity(CarRequestDTO dto){
+    public static Car toEntity(CarRequestDTO dto){
         return new Car(dto.getId(),
                 dto.getStatus(),
                 dto.getPricePerDay(),
@@ -15,7 +15,7 @@ public class CarMapper {
                 dto.getCarName());
     }
 
-    public CarReponseDTO toDto(Car car){
+    public static CarReponseDTO toDto(Car car){
         return new CarReponseDTO(car.getCarName(),
                 car.getBrand(),
                 car.getSeatCount(),
