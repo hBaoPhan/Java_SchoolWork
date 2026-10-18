@@ -48,6 +48,9 @@ public class CarService implements CarInterface {
 
     @Override
     public List<RentalContractHistoryDTO> getContractByCustomer(String id) {
-        return carDAO.getContractByCustomer(id).stream().map(rentalContract -> RentalContractHistoryMapper.toReponseDTO(rentalContract)).collect(Collectors.toList());
+        return carDAO.getContractByCustomer(id)
+                .stream()
+                .map(rentalContract -> RentalContractHistoryMapper.toReponseDTO(rentalContract))
+                .collect(Collectors.toList());
     }
 }
