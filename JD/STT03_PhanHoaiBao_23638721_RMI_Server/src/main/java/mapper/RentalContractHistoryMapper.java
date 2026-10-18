@@ -1,7 +1,7 @@
 package mapper;
 
 import dto.reponse.RentalContractHistoryDTO;
-import entity.ContractStatus;
+import enums.ContractStatus;
 
 import java.time.LocalDate;
 

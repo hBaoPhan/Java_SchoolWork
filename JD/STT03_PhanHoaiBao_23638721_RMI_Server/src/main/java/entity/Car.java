@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.Set;
 
+import enums.CarStatus;
+
 @Getter
 @Setter
 @Entity

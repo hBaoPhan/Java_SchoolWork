@@ -1,4 +1,4 @@
-package entity;
+package enums;
 
 import java.io.Serializable;
 

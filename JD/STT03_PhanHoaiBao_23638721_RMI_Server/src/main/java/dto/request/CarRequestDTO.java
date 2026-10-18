@@ -1,9 +1,10 @@
 package dto.request;
 
-import entity.CarStatus;
 import lombok.Getter;
 
 import java.io.Serializable;
+
+import enums.CarStatus;
 
 @Getter
 public class CarRequestDTO implements Serializable {

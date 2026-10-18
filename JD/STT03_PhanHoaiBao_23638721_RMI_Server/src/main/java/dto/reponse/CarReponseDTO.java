@@ -1,11 +1,12 @@
 package dto.reponse;
 
-import entity.CarStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+
+import enums.CarStatus;
 
 @Getter
 @Setter
