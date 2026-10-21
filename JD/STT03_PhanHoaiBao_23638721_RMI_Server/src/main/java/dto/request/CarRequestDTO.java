@@ -1,5 +1,6 @@
 package dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -7,6 +8,7 @@ import java.io.Serializable;
 import enums.CarStatus;
 
 @Getter
+@AllArgsConstructor
 public class CarRequestDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
